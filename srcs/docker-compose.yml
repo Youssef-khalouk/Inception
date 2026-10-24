@@ -1,21 +1,44 @@
 
 services:
+  wordpress:
+    container_name: wordpress
+    build: ./requirements/wordpress
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - wordpress_data:/var/www/html
+    networks:
+      - network
+
   nginx:
     container_name: nginx
     build: ./requirements/nginx
-    # depends_on:
-    #   - adminer
-    #   - redis
-    #   - hugo
+    depends_on:
+      - wordpress
     ports:
       - 8443:443
-    # volumes:
-    #   - wordpress_data:/var/www/html
+    volumes:
+      - wordpress_data:/var/www/html
     restart: always
     networks:
       - network
 
+  mariadb:
+    build: ./requirements/mariadb
+    container_name: mariadb
+    env_file:
+      - .env
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks:
+      - network
+
+volumes:
+  wordpress_data:
+  mariadb_data:
 
 networks:
     network:
         driver: bridge
+
