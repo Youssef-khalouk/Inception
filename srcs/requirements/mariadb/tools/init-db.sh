@@ -1,4 +1,3 @@
-
 #!/bin/bash
 set -e
 
@@ -18,6 +17,8 @@ GRANT ALL PRIVILEGES ON \`${MYSQL_DATABASE}\`.* TO '${MYSQL_USER}'@'%';
 FLUSH PRIVILEGES;
 SQL
 
-# Keep MariaDB running in the foreground.
+# Stop the temporary server.
 mysqladmin -u root shutdown
-exec mariadbd --user=mysql --console
+
+# Keep MariaDB running in the foreground.
+exec mariadbd --user=mysql --console --bind-address=0.0.0.0
