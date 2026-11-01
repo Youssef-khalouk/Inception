@@ -5,6 +5,7 @@ services:
     build: ./requirements/wordpress
     depends_on:
       - mariadb
+      - redis
     restart: always
     env_file:
       - .env
@@ -36,6 +37,13 @@ services:
     networks:
       - network
     restart: always
+  
+  redis:
+    build: ./requirements/bonus/redis
+    container_name: redis
+    restart: always
+    networks:
+      - network
 
 volumes:
   wordpress_data:

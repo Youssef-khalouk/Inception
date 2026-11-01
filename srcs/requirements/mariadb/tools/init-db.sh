@@ -9,6 +9,11 @@ fi
 # Start MariaDB temporarily to configure the database.
 service mariadb start
 
+until mariadb-admin ping --silent; do
+    echo "Waiting for MariaDB..."
+    sleep 1
+done
+
 # Create the WordPress database and user.
 mariadb -u root <<SQL
 CREATE DATABASE IF NOT EXISTS \`${MYSQL_DATABASE}\`;
