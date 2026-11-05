@@ -9,6 +9,7 @@ until php -r '$db = @new mysqli(getenv("MYSQL_HOST"), getenv("MYSQL_USER"), trim
     echo "Waiting for MariaDB..."
     sleep 2
 done
+echo "mariadb connected."
 
 
 # Download WordPress if not already present

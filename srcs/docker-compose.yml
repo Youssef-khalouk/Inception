@@ -94,17 +94,30 @@ services:
       - portainer_data:/data
     restart: always
 
-
 volumes:
   wordpress_data:
-  mariadb_data:
-  portainer_data:
-    name : portainer
-    driver: local
+    name : wordpress
+    driver : local
     driver_opts:
       type: none
-      device: /${HOME}/data/portainer
       o: bind
+      device: /home/ykhalouk/data/wordpress_data
+
+  mariadb_data:
+    name : mariadb
+    driver : local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/ykhalouk/data/mariadb_data
+
+  portainer_data:
+    name : portainer
+    driver : local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/ykhalouk/data/portainer_data
 
 networks:
     network:

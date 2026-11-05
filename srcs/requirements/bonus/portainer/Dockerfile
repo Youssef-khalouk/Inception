@@ -5,4 +5,6 @@ RUN apt update && apt install curl -y \
     && tar xvzf portainer.tar.gz \
     && rm portainer.tar.gz
 
+EXPOSE 9000 9443 8000
+
 CMD [ "/portainer/portainer" ]

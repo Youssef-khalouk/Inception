@@ -6,4 +6,7 @@ COPY tools/scriptftp.sh /script.sh
 
 RUN chmod +x /script.sh
 
+EXPOSE 21
+EXPOSE 30000-30009
+
 CMD ["/script.sh"]
