@@ -15,8 +15,6 @@ services:
       - network
     secrets:
       - db_password
-      - db_root_password
-      - wp_admin_password
 
   nginx:
     container_name: nginx
@@ -41,9 +39,8 @@ services:
     networks:
       - network
     restart: always
-    secrets: # ????????????
+    secrets:
       - db_password
-      - db_root_password
   
   redis:
     build: ./requirements/bonus/redis
@@ -52,9 +49,62 @@ services:
     networks:
       - network
 
+  ftp:
+    build: ./requirements/bonus/ftp
+    volumes:
+      - wordpress_data:/var/www/html
+    container_name: ftp
+    depends_on:
+      - wordpress
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "21:21"
+      - "30000-30009:30000-30009"
+    networks:
+      - network
+  
+  adminer:
+    build: ./requirements/bonus/adminer
+    container_name: adminer
+    restart: always
+    ports:
+      - 8081:8081
+    networks:
+      - network
+  
+  cv:
+    container_name: cv
+    build: ./requirements/bonus/my_cv
+    restart: always
+    networks:
+      - network
+  
+  portainer:
+    build: requirements/bonus/portainer
+    container_name: portainer
+    networks:
+      - network
+    ports:
+      - "9000:9000"
+      - "9443:9443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    restart: always
+
+
 volumes:
   wordpress_data:
   mariadb_data:
+  portainer_data:
+    name : portainer
+    driver: local
+    driver_opts:
+      type: none
+      device: /${HOME}/data/portainer
+      o: bind
 
 networks:
     network:
@@ -63,9 +113,3 @@ networks:
 secrets:
   db_password:
     file: ../secrets/db_password.txt
-
-  db_root_password:
-    file: ../secrets/db_root_password.txt
-  
-  wp_admin_password:
-    file: ../secrets/wp_admin_password.txt

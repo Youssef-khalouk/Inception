@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Personal developer portfolio and CV." />
+  <title>YOUSSEF KHALOUK | Developer CV</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --surface: rgba(20, 29, 51, .82);
+      --surface-strong: #151f38;
+      --text: #eef3ff;
+      --muted: #a8b4cc;
+      --line: rgba(178, 196, 230, .16);
+      --accent: #82aaff;
+      --accent-2: #70e1c1;
+      --shadow: 0 24px 70px rgba(0, 0, 0, .28);
+      --radius: 22px;
+      --max-width: 1080px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 12% 0%, rgba(91, 124, 250, .18), transparent 34rem),
+        radial-gradient(ellipse at 95% 28%, rgba(68, 211, 174, .10), transparent 30rem),
+        var(--bg);
+      font: 16px/1.65 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    a { color: inherit; text-decoration: none; }
+    a:hover { color: var(--accent-2); }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    .container { width: min(var(--max-width), calc(100% - 40px)); margin: 0 auto; }
+
+    .topbar {
+      position: sticky; top: 0; z-index: 10;
+      border-bottom: 1px solid var(--line);
+      background: rgba(11, 16, 32, .78);
+      backdrop-filter: blur(18px);
+    }
+    .nav {
+      min-height: 72px; display: flex; align-items: center;
+      justify-content: space-between; gap: 24px;
+    }
+    .brand { font-weight: 800; letter-spacing: -.04em; font-size: 1.08rem; }
+    .brand span { color: var(--accent-2); }
+    .nav-links { display: flex; gap: 24px; color: var(--muted); font-size: .92rem; }
+    .nav-links a { transition: color .2s ease; }
+    .nav-links a:hover { color: var(--text); }
+    .menu-toggle {
+      display: none; border: 1px solid var(--line); background: var(--surface);
+      color: var(--text); border-radius: 10px; padding: 8px 12px; cursor: pointer;
+    }
+
+    .hero { padding: 104px 0 76px; display: grid; grid-template-columns: 1.35fr .65fr; gap: 54px; align-items: center; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 7px 12px; border: 1px solid var(--line); border-radius: 999px;
+      color: var(--accent-2); background: rgba(112, 225, 193, .07);
+      font-size: .82rem; font-weight: 650; letter-spacing: .03em;
+    }
+    .status-dot { width: 7px; height: 7px; background: var(--accent-2); border-radius: 50%; box-shadow: 0 0 12px var(--accent-2); }
+    h1 { margin: 22px 0 16px; font-size: clamp(2.8rem, 7vw, 5.4rem); line-height: .99; letter-spacing: -.065em; }
+    h1 .gradient { background: linear-gradient(100deg, #a9c2ff, #70e1c1); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero-copy { max-width: 650px; color: var(--muted); font-size: 1.12rem; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      border-radius: 12px; padding: 12px 17px; font-weight: 700; font-size: .93rem;
+      border: 1px solid var(--line); transition: transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { color: #08111d; background: linear-gradient(110deg, #a9c2ff, #70e1c1); border: 0; }
+    .btn-secondary { background: rgba(255,255,255,.035); }
+    .hero-card {
+      padding: 26px; border: 1px solid var(--line); border-radius: var(--radius);
+      background: linear-gradient(145deg, rgba(29, 43, 73, .9), rgba(17, 25, 45, .78));
+      box-shadow: var(--shadow); transform: rotate(2deg);
+    }
+    .avatar {
+      width: 74px; height: 74px; border-radius: 20px; display: grid; place-items: center;
+      color: #08111d; font-size: 1.7rem; font-weight: 900;
+      background: linear-gradient(135deg, #a9c2ff, #70e1c1); margin-bottom: 22px;
+    }
+    .hero-card h2 { margin: 0 0 4px; font-size: 1.2rem; }
+    .hero-card p { margin: 0; color: var(--muted); font-size: .9rem; }
+    .mini-line { height: 1px; background: var(--line); margin: 20px 0; }
+    .quick-fact { display: flex; justify-content: space-between; gap: 12px; margin: 10px 0; font-size: .88rem; }
+    .quick-fact span:first-child { color: var(--muted); }
+
+    section { padding: 54px 0; scroll-margin-top: 82px; }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 25px; }
+    .kicker { color: var(--accent-2); text-transform: uppercase; letter-spacing: .16em; font-size: .72rem; font-weight: 800; }
+    h2.section-title { margin: 5px 0 0; font-size: clamp(1.8rem, 4vw, 2.5rem); line-height: 1.1; letter-spacing: -.045em; }
+    .section-note { color: var(--muted); max-width: 440px; font-size: .9rem; }
+    .panel { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); box-shadow: var(--shadow); }
+    .about-panel { padding: 30px; color: var(--muted); }
+    .about-panel p { margin: 0 0 14px; }
+    .about-panel p:last-child { margin-bottom: 0; }
+
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .skill-group { padding: 22px; }
+    .skill-group h3 { margin: 0 0 15px; font-size: 1rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag { padding: 6px 10px; border-radius: 8px; border: 1px solid var(--line); background: rgba(255,255,255,.035); color: #cbd7ee; font-size: .82rem; }
+
+    .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .project { padding: 25px; position: relative; overflow: hidden; transition: transform .2s ease, border-color .2s ease; }
+    .project:hover { transform: translateY(-4px); border-color: rgba(130,170,255,.45); }
+    .project-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 17px; }
+    .project-icon { width: 43px; height: 43px; display: grid; place-items: center; border-radius: 13px; background: rgba(130,170,255,.12); color: var(--accent); font-size: 1.2rem; }
+    .project-status { font-size: .72rem; color: var(--accent-2); border: 1px solid rgba(112,225,193,.22); background: rgba(112,225,193,.07); padding: 5px 9px; border-radius: 999px; }
+    .project h3 { margin: 0 0 8px; font-size: 1.15rem; }
+    .project p { color: var(--muted); margin: 0 0 18px; font-size: .91rem; }
+    .project .tags { margin-top: auto; }
+    .timeline { padding: 26px 30px; }
+    .timeline-item { display: grid; grid-template-columns: 160px 1fr; gap: 22px; padding: 14px 0; }
+    .timeline-item + .timeline-item { border-top: 1px solid var(--line); }
+    .timeline-date { color: var(--accent-2); font-size: .83rem; font-weight: 700; }
+    .timeline-content h3 { margin: 0 0 4px; font-size: 1rem; }
+    .timeline-content p { margin: 0; color: var(--muted); font-size: .9rem; }
+
+    .contact-panel { padding: 32px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .contact-panel p { color: var(--muted); margin: 8px 0 0; max-width: 560px; }
+    .contact-links { display: flex; flex-wrap: wrap; gap: 10px; }
+    footer { padding: 30px 0 44px; color: #7887a3; font-size: .82rem; border-top: 1px solid var(--line); }
+    footer .container { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+
+    @media (max-width: 760px) {
+      .hero { grid-template-columns: 1fr; padding-top: 76px; gap: 34px; }
+      .hero-card { max-width: 420px; transform: none; }
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
+      .contact-panel { align-items: flex-start; flex-direction: column; }
+    }
+    @media (max-width: 560px) {
+      .container { width: min(100% - 28px, var(--max-width)); }
+      .nav { min-height: 64px; }
+      .menu-toggle { display: inline-flex; }
+      .nav-links {
+        display: none; position: absolute; top: 64px; left: 14px; right: 14px;
+        padding: 16px; border: 1px solid var(--line); border-radius: 14px;
+        background: #121b30; flex-direction: column; gap: 13px;
+      }
+      .nav-links.open { display: flex; }
+      .hero { padding: 64px 0 44px; }
+      .skills-grid, .projects-grid { grid-template-columns: 1fr; }
+      .section-heading { display: block; }
+      .section-note { margin-top: 10px; }
+      .timeline { padding: 20px; }
+      .timeline-item { grid-template-columns: 1fr; gap: 3px; }
+      .contact-panel, .about-panel { padding: 23px; }
+    }
+    @media print {
+      :root { --bg: #fff; --text: #172033; --muted: #4c5870; --surface: #fff; --line: #d9dfeb; }
+      body { background: #fff; color: #172033; }
+      .topbar, .actions, .menu-toggle { display: none !important; }
+      .hero { padding: 28px 0; }
+      .hero-card, .panel { box-shadow: none; background: #fff; }
+      section { padding: 24px 0; break-inside: avoid; }
+      a { color: inherit; }
+    }
+  </style>
+</head>
+<body>
+  <!--
+    QUICK PERSONALIZATION:
+    1. Search for "EDIT:" and replace the placeholders with your real details.
+    2. Add only skills, dates, education and experience that are accurate.
+    3. Replace the example GitHub/LinkedIn URLs with your own links.
+    4. Use your browser's Print > Save as PDF if you ever need a PDF copy.
+  -->
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="#home">YOUSSEF<span> KHALOUK</span></a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">Menu</button>
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#background">Background</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <section class="hero" id="home">
+        <div>
+          <div class="eyebrow"><span class="status-dot"></span> SOFTWARE DEVELOPER · EDIT YOUR ROLE</div>
+          <h1>Hi, I'm <span class="gradient">YOUSSEF KHALOUK.</span><br />I build things with code.</h1>
+          <p class="hero-copy">
+            <!-- EDIT: Replace this with a short, honest summary of your interests and the kind of role you want. -->
+            I'm a developer interested in building reliable software, exploring systems and backend technologies,
+            and turning ideas into practical projects.
+          </p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#projects">Explore my projects <span aria-hidden="true">↗</span></a>
+            <a class="btn btn-secondary" href="#contact">Get in touch</a>
+            <button class="btn btn-secondary" id="printButton" type="button">Print CV</button>
+          </div>
+        </div>
+        <aside class="hero-card" aria-label="Profile summary">
+          <div class="avatar">YN</div>
+          <h2>youssef khalouk</h2>
+          <p>Software Developer · Morocco</p>
+          <div class="mini-line"></div>
+          <div class="quick-fact"><span>Focus</span><strong>c · C++ · Python</strong></div>
+          <div class="quick-fact"><span>Currently</span><strong>Building & learning</strong></div>
+          <div class="quick-fact"><span>Contact</span><strong>nkiinaya@example.com</strong></div>
+        </aside>
+      </section>
+
+      <section id="about">
+        <div class="section-heading">
+          <div><div class="kicker">A little introduction</div><h2 class="section-title">About me</h2></div>
+          <p class="section-note">A concise overview of what you do, what you enjoy building, and where you want to go next.</p>
+        </div>
+        <div class="panel about-panel">
+          <!-- EDIT: Personalize this paragraph. Avoid claiming professional experience you don't have. -->
+          <p>
+            I enjoy understanding how software works beneath the surface — from application architecture
+            and databases to networking, deployment and performance. I like learning by building,
+            debugging real problems and improving projects step by step.
+          </p>
+          <p>
+            My project work has included a C++ desktop typing application, a Docker-based web infrastructure,
+            and Python tooling involving MCP and software-engineering benchmarks.
+          </p>
+        </div>
+      </section>
+
+      <section id="skills">
+        <div class="section-heading">
+          <div><div class="kicker">What I work with</div><h2 class="section-title">Technical skills</h2></div>
+          <p class="section-note">Edit these groups to reflect your actual level. Remove anything you wouldn't feel comfortable discussing in an interview.</p>
+        </div>
+        <div class="skills-grid">
+          <article class="panel skill-group">
+            <h3>Languages</h3>
+            <div class="tags"><span class="tag">C</span><span class="tag">Python</span><span class="tag">C++</span><span class="tag">html</span><span class="tag">JavaScript</span></div>
+          </article>
+          <article class="panel skill-group">
+            <h3>Tools & infrastructure</h3>
+            <div class="tags"><span class="tag">Docker</span><span class="tag">Docker Compose</span><span class="tag">Linux</span><span class="tag">Nginx</span><span class="tag">Git</span></div>
+          </article>
+          <article class="panel skill-group">
+            <h3>Frameworks & technologies</h3>
+            <div class="tags"><span class="tag">wxWidgets</span><span class="tag">MariaDB</span><span class="tag">SQLite</span><span class="tag">Redis</span><span class="tag">MCP</span><span class="tag">WebSockets</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="projects">
+        <div class="section-heading">
+          <div><div class="kicker">Selected work</div><h2 class="section-title">Projects</h2></div>
+          <p class="section-note">A selection of projects discussed and worked on. Add repository links, screenshots and measurable results when available.</p>
+        </div>
+        <div class="projects-grid">
+          <article class="panel project">
+            <div class="project-top"><div class="project-icon" aria-hidden="true">⌨</div><span class="project-status">Desktop application</span></div>
+            <h3>TypingProfessional</h3>
+            <p>A C++ desktop typing application focused on typing practice and performance statistics, with a custom wxWidgets interface and local data storage.</p>
+            <div class="tags"><span class="tag">C++17</span><span class="tag">wxWidgets</span><span class="tag">SQLite</span><span class="tag">ixwebsocket</span></div>
+          </article>
+          <article class="panel project">
+            <div class="project-top"><div class="project-icon" aria-hidden="true">▦</div><span class="project-status">Infrastructure</span></div>
+            <h3>Inception</h3>
+            <p>A containerized web infrastructure built with Docker Compose, bringing together Nginx, WordPress, MariaDB and supporting services.</p>
+            <div class="tags"><span class="tag">Docker</span><span class="tag">Nginx</span><span class="tag">WordPress</span><span class="tag">MariaDB</span><span class="tag">Redis</span></div>
+          </article>
+          <article class="panel project">
+            <div class="project-top"><div class="project-icon" aria-hidden="true">⌘</div><span class="project-status">AI / developer tooling</span></div>
+            <h3>Agent_Smith</h3>
+            <p>Python tooling exploring MCP integrations and sandboxed execution workflows for software-engineering benchmark tasks.</p>
+            <div class="tags"><span class="tag">Python</span><span class="tag">MCP</span><span class="tag">Asyncio</span><span class="tag">Docker</span><span class="tag">SWE-bench</span></div>
+          </article>
+          <article class="panel project">
+            <div class="project-top"><div class="project-icon" aria-hidden="true">◇</div><span class="project-status">Concept / exploration</span></div>
+            <h3>Multiplayer typing platformer</h3>
+            <p>An explored game concept combining typing challenges with a 2D multiplayer platformer, including research into client-server architecture and real-time networking.</p>
+            <div class="tags"><span class="tag">C++</span><span class="tag">Networking</span><span class="tag">WebSockets</span><span class="tag">Game development</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="background">
+        <div class="section-heading">
+          <div><div class="kicker">The journey so far</div><h2 class="section-title">Education & experience</h2></div>
+          <p class="section-note">Add your real education, work history, internships, certifications or community experience here.</p>
+        </div>
+        <div class="panel timeline">
+          <div class="timeline-item">
+            <div class="timeline-date">YEAR – PRESENT</div>
+            <div class="timeline-content"><h3>Education / Training</h3><p>Institution, program or qualification. Add relevant coursework or achievements.</p></div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">DATES</div>
+            <div class="timeline-content"><h3>Experience / Internship</h3><p>Role, organization and a short description of your responsibilities or impact. Delete this entry if not applicable.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="panel contact-panel">
+          <div>
+            <div class="kicker">Let's connect</div>
+            <h2 class="section-title">Have a project in mind?</h2>
+            <p>I'm open to conversations about software development, interesting projects and opportunities to learn and contribute.</p>
+          </div>
+          <div class="contact-links">
+            <a class="btn btn-primary" href="mailto:nkiinaya@example.com">Email me ↗</a>
+            <!-- EDIT: Replace # with your real profile URLs. -->
+            <a class="btn btn-secondary" href="https://github.com/Youssef-khalouk?tab=repositories" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <span>© <span id="year"></span> youssef khalouk . Built with HTML, CSS & JavaScript.</span>
+      <a href="#home">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    navLinks.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    document.getElementById("printButton").addEventListener("click", () => window.print());
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
