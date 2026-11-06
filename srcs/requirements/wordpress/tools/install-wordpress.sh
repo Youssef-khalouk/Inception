@@ -57,7 +57,7 @@ USER_PASSWORD=$(cat /run/secrets/wp_user_password)
 # Install WordPress if not already installed
 if ! wp core is-installed --path="$WP_PATH" --allow-root 2>/dev/null; then
     wp core install \
-        --url="https://localhost" \
+        --url="https://ykhalouk.42.fr" \
         --title="$WP_TITLE" \
         --admin_user="$WP_ADMIN_USER" \
         --admin_password="$ADMIN_PASSWORD" \
