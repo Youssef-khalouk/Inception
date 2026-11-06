@@ -1,6 +1,6 @@
 FROM debian:bookworm
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt update && apt install -y --no-install-recommends \
     php8.2 \
     php8.2-fpm \
     php8.2-mysql \
@@ -28,6 +28,9 @@ RUN chmod +x /install-wordpress.sh
 COPY tools/www.conf /etc/php/8.2/fpm/pool.d/www.conf
 
 WORKDIR /var/www/html
+# download wp cli for terminal commands so we can create users that we need.
+RUN curl -o /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+    && chmod +x /usr/local/bin/wp
 
 EXPOSE 9000
 

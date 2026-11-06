@@ -1,8 +1,8 @@
 
 FROM debian:bookworm
 
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends mariadb-server && \
+RUN apt update && \
+    apt install -y --no-install-recommends mariadb-server && \
     rm -rf /var/lib/apt/lists/*
 
 # Create necessary directories
